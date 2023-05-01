@@ -2,9 +2,14 @@
 
 ## Installation
 
+Either using PIP
+
 ```bash
 python -m pip install django-filter-autotools
 ```
+
+or directly copying the file `django_filters_autotools/mixins.py` into your project.
+
 
 ## DefaultLookupsMixin
 
