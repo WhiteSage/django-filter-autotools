@@ -124,4 +124,5 @@ REST_FRAMEWORK = {
 ## More info
 
 [PyPI project](https://pypi.org/project/django-filter-autotools/)
+
 [Github page](https://github.com/WhiteSage/django-filter-autotools)
