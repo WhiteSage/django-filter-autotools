@@ -55,7 +55,7 @@ class MyFilterSet(PseudoLookupsMixin, FilterSet):
 
 Under the hood this works by replacing the lookup with the one specified in the `behaves_like` key, running the filter creation algorithm and then patching the filters if necessary. This way any transformer or any extra lookups registered into Django will also be available.
 
-PSEUDO_LOOKUPS is a dictionary whose keys are the new lookups to be supported and the values are dictionary with the following keys:
+`PSEUDO_LOOKUPS` is a dictionary whose keys are the new lookups to be supported and the values are dictionary with the following keys:
 
 * `behaves_like`: should be a lookup registered in Django with similar semantics.
 * `filter_class`: filter class to be used for this lookup. If not specified or None, the one chosen django-filters for the `behaves_like` lookup will be used. Note these may be fine-tuned by overriding the `FILTER_FOR_DBFIELD_DEFAULTS` dictionary.
