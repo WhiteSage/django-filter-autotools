@@ -72,6 +72,8 @@ Complete example making available several lookups by default for all fields of t
 filters.py:
 ```python
 from django_filters import rest_framework as filters
+from django.db import models
+from django.core.validators import EMPTY_VALUES
 from django_filters_autotools.mixins import *
 
 
@@ -118,3 +120,8 @@ REST_FRAMEWORK = {
     ],
 }
 ```
+
+## More info
+
+[PyPI project](https://pypi.org/project/django-filter-autotools/)
+[Github page](https://github.com/WhiteSage/django-filter-autotools)
