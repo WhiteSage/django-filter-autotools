@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django-filter-autotools", 
-    version="0.0.4", 
+    version="0.0.5", 
     description=(
         "Provides some mixins which allow automatic generation of filtersets with"
         "a list of lookups, including new lookups not registered into Django."
