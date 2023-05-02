@@ -150,8 +150,9 @@ class PseudoLookupsMixin():
         PSEUDO_LOOKUPS = getattr(cls, 'PSEUDO_LOOKUPS', [])
 
         pseudo = None
+        lookup_expr_parts = lookup_expr.split('__')
         for lookup in PSEUDO_LOOKUPS:
-            if lookup_expr.endswith(lookup):
+            if lookup_expr_parts[-1] == lookup:
                 pseudo = lookup
                 lookup_expr = lookup_expr[:-len(lookup)] + PSEUDO_LOOKUPS[lookup]['behaves_like']
                 break

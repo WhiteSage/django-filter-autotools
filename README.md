@@ -2,7 +2,7 @@
 
 ## Installation
 
-Either using PIP
+Either using pip
 
 ```bash
 python -m pip install django-filter-autotools
