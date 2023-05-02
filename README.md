@@ -52,7 +52,7 @@ class MyFilterSet(PseudoLookupsMixin, FilterSet):
         'not_icontains': {
             'behaves_like': 'icontains',
             'filter_class': None,
-            'replace_lookup': 'icontains',
+            'replace_with': 'icontains',
             'extra': lambda f: {'exclude': True}
         }
     }
@@ -64,7 +64,7 @@ Under the hood this works by replacing the lookup with the one specified in the 
 
 * `behaves_like`: should be a lookup registered in Django with similar semantics.
 * `filter_class`: filter class to be used for this lookup. If not specified or None, the one chosen django-filters for the `behaves_like` lookup will be used. Note these may be fine-tuned by overriding the `FILTER_FOR_DBFIELD_DEFAULTS` dictionary.
-* `replace_lookup`: if present the filter class is patched so that its `__init__` method replaces the new lookup with this value.
+* `replace_with`: if present the filter class is patched so that its `__init__` method replaces the new lookup with this value.
 * `extra`: if present the object returned from applying this function to the field will be merged into the filter class kwargs.
 
 Note that more fine-tuning by overriding the `filter_for_pseudolookup` class method (for example, choosing the filter class based on the field type).
@@ -103,7 +103,7 @@ class MyFilterSet(DefaultLookupsMixin, PseudoLookupsMixin, filters.FilterSet):
         'not_icontains': {
             'behaves_like': 'icontains',
             'filter_class': None,
-            'replace_lookup': 'icontains',
+            'replace_with': 'icontains',
             'extra': lambda f: {'exclude': True}
         }
     }

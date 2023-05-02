@@ -93,7 +93,7 @@ class PseudoLookupsMixin():
         Override this method to provide custom lookups.
         By default it returns the class specified in 'filter_class' if not None.
         If None was specified, it returns the class django-filters' would use.
-        If 'replace_lookup' is set, patches the class to receive this lookup 
+        If 'replace_with' is set, patches the class to receive this lookup 
         instead of the actual one.
 
         Args:
@@ -115,8 +115,8 @@ class PseudoLookupsMixin():
             params = df_params
 
         # Patch the class if we have to so that it receives the new lookup
-        if cls.PSEUDO_LOOKUPS[lookup_type].get('replace_lookup', None):
-            filter_class = cls.patch_filter_class(filter_class, lookup_type, cls.PSEUDO_LOOKUPS[lookup_type]['replace_lookup'])
+        if cls.PSEUDO_LOOKUPS[lookup_type].get('replace_with', None):
+            filter_class = cls.patch_filter_class(filter_class, lookup_type, cls.PSEUDO_LOOKUPS[lookup_type]['replace_with'])
 
         return filter_class, params
 
