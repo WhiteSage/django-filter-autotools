@@ -4,6 +4,7 @@ from django_filters.utils import get_model_field, try_dbfield
 from django.db import models
 from django.db.models.fields.related import (ManyToManyRel, ManyToOneRel, OneToOneRel)
 from django.core.validators import EMPTY_VALUES
+from django.db.models.constants import LOOKUP_SEP
 
 
 
@@ -150,7 +151,7 @@ class PseudoLookupsMixin():
         PSEUDO_LOOKUPS = getattr(cls, 'PSEUDO_LOOKUPS', [])
 
         pseudo = None
-        lookup_expr_parts = lookup_expr.split('__')
+        lookup_expr_parts = lookup_expr.split(LOOKUP_SEP)
         for lookup in PSEUDO_LOOKUPS:
             if lookup_expr_parts[-1] == lookup:
                 pseudo = lookup
