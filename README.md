@@ -63,11 +63,11 @@ Under the hood this works by replacing the lookup with the one specified in the 
 `PSEUDO_LOOKUPS` is a dictionary whose keys are the new lookups to be supported and the values are dictionary with the following keys:
 
 * `behaves_like`: should be a lookup registered in Django with similar semantics.
-* `filter_class`: filter class to be used for this lookup. If not specified or None, the one chosen django-filters for the `behaves_like` lookup will be used. Note these may be fine-tuned by overriding the `FILTER_FOR_DBFIELD_DEFAULTS` dictionary.
+* `filter_class`: filter class to be used for this lookup. If not specified or set to None, the one chosen django-filter for the `behaves_like` lookup will be used. Note that these may be fine-tuned by overriding the `FILTER_FOR_DBFIELD_DEFAULTS` dictionary.
 * `replace_with`: if present the filter class is patched so that its `__init__` method replaces the new lookup with this value.
 * `extra`: if present the object returned from applying this function to the field will be merged into the filter class kwargs.
 
-Note that more fine-tuning by overriding the `filter_for_pseudolookup` class method (for example, choosing the filter class based on the field type).
+Override the `filter_for_pseudolookup` class method on the FilterSet if you need to choose different filter classes depending on both the field type and the lookup.
 
 
 ## Integrating everything into DRF by default
