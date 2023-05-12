@@ -28,7 +28,7 @@ class MyFilterSet(DefaultLookupsMixin, FilterSet):
 
 ## PseudoLookupsMixin
 
-We can use this mixin to patch the FilterSet filter creation algorithm to understand some lookups which are not registered into Django. Two common scenarios are checking whether a string is empty, and adding "exclusion" filters:
+We can use this mixin to patch the FilterSet filter creation algorithm to understand some lookups which are not registered into Django. Two common scenarios are checking whether a string is empty, adding "exclusion" filters (not) and adding "conjoined" filters (and for m2m):
 
 ```python
 class EmptyStringFilter(filters.BooleanFilter):
@@ -54,6 +54,12 @@ class MyFilterSet(PseudoLookupsMixin, FilterSet):
             'filter_class': None,
             'replace_with': 'icontains',
             'extra': lambda f: {'exclude': True}
+        },
+        'exact_all': {
+            'behaves_like': 'exact',
+            'filter_class': None,
+            'replace_with': 'exact',
+            'extra': lambda f: {'conjoined': True}
         }
     }
 ```
@@ -72,7 +78,7 @@ Override the `filter_for_pseudolookup` class method on the FilterSet if you need
 
 ## Integrating everything into DRF by default
 
-Complete example making available several lookups by default for all fields of type `CharField`:
+Complete example making available several lookups by default for all fields of type `CharField`, and conjoined filters for all fields of type `ManyToManyField`:
 
 filters.py:
 ```python
@@ -105,11 +111,18 @@ class MyFilterSet(DefaultLookupsMixin, PseudoLookupsMixin, filters.FilterSet):
             'filter_class': None,
             'replace_with': 'icontains',
             'extra': lambda f: {'exclude': True}
+        },
+        'exact_all': {
+            'behaves_like': 'exact',
+            'filter_class': None,
+            'replace_with': 'exact',
+            'extra': lambda f: {'conjoined': True}
         }
     }
 
     DEFAULT_LOOKUPS = {
-        models.CharField:      [ 'exact', 'icontains', 'isempty', 'not_icontains' ],
+        models.CharField:        [ 'exact', 'icontains', 'isempty', 'not_icontains' ],
+        models.ManyToManyField:  [ 'exact', 'exact_all' ],
     }
 
     
